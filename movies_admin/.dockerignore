@@ -1,0 +1,6 @@
+src/static
+src/*/migrations
+
+src/.env
+Dockerfile
+nginx.conf

@@ -50,3 +50,9 @@ ENV/
 
 # auto generated docs
 doc.html
+
+venv/
+static/
+.vscode
+.env
+.log

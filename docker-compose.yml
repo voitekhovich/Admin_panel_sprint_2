@@ -1,0 +1,17 @@
+# Локальный докер
+
+version: '3.3'
+
+services:
+ 
+  postgres:
+    container_name: loc_postgres
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      # - ./data:/var/lib/postgresql/data
+      # - ./schema_design/db_schema.sql:/app/db.sql
+      - ./schema_design/db_schema.sql:/docker-entrypoint-initdb.d/db.sql
+    env_file:
+      - .env

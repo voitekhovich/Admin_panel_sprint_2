@@ -12,26 +12,26 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ../schema_design/db_schema.sql:/docker-entrypoint-initdb.d/db.sql
     env_file:
-      - ./src/.env
+      - ../movies_admin/src/.env
   
   backend:
-    build: .
+    build: ../movies_admin/.
     restart: always
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_value:/code/static
       - ../sqlite_to_postgres/:/code/sqlite_to_postgres
     env_file:
-      - ./src/.env
+      - ../movies_admin/src/.env
     depends_on:
       - postgres
 
   nginx:
-    image: nginx:1.19.3
+    image: nginx:latest
     ports:
       - 80:80
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
       - static_value:/var/html/static
     depends_on:
       - backend
